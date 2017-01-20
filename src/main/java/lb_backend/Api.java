@@ -24,18 +24,31 @@ public class Api {
         });
 
         get("/api/notes/:noteId", (req, res) -> {
-            NoteModel model = new NoteModel();
-            GsonBuilder builder = new GsonBuilder();
-            Gson gson = builder.create();
-            return gson.toJson(model.getANote(Integer.parseInt(req.params(":noteId"))));
+            try{
+                NoteModel model = new NoteModel();
+                GsonBuilder builder = new GsonBuilder();
+                Gson gson = builder.create();
+                int noteId;
+                try {
+                    noteId = Integer.parseInt(req.params(":noteId"));
+                } catch (NumberFormatException e) {
+                    return "Id must be a valid integer";
+                }
+                return gson.toJson(model.getANote(noteId));
+            }catch(NoteNotFoundException e){
+                return e.getMessage();
+            }
+
         });
 
-        post("/api/notes/", (req, res) -> {
-            NoteModel model = new NoteModel();
-            model.createNote(req.body());
+        post("/api/notes", (req, res) -> {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
-            return gson.toJson(model.createNote(req.body()));
+            Note newNote = gson.fromJson(req.body(),Note.class);
+            NoteModel model = new NoteModel();
+            newNote = model.createNote(newNote.body);
+            return gson.toJson(newNote);
+
         });
     }
 }
