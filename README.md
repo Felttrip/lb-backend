@@ -3,7 +3,7 @@
 This application is a RESTful JSON API that could back a simple note taking application. 
 
 The project is written in Java and uses the [Spark micro framework](http://sparkjava.com/) for routing, 
-[Google gson](https://github.com/google/gson)for serializing and de-serializing JSON, and [Sql2o](http://www.sql2o.org/)
+[Google gson](https://github.com/google/gson) for serializing and de-serializing JSON, and [Sql2o](http://www.sql2o.org/)
 for connecting with the MySql database. 
 
 ##Dependencies
