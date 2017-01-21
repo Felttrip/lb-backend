@@ -10,17 +10,21 @@ public class Api {
 
     public static void main(String[] args) {
         get("/api/notes", (req, res) -> {
-            String query = req.queryParams("query");
-            NoteModel model = new NoteModel();
-            List<Note> notes;
-            if(query!=null){
-                notes = model.getNotesWithBody(query);
-            }else{
-                notes = model.getAllNotes();
+            try {
+                String query = req.queryParams("query");
+                NoteModel model = new NoteModel();
+                List<Note> notes;
+                if (query != null) {
+                    notes = model.getNotesWithBody(query);
+                } else {
+                    notes = model.getAllNotes();
+                }
+                GsonBuilder builder = new GsonBuilder();
+                Gson gson = builder.create();
+                return gson.toJson(notes);
+            }catch (Exception e){
+                return e.getMessage();
             }
-            GsonBuilder builder = new GsonBuilder();
-            Gson gson = builder.create();
-            return gson.toJson(notes);
         });
 
         get("/api/notes/:noteId", (req, res) -> {

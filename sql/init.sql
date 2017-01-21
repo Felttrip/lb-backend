@@ -4,4 +4,5 @@ CREATE TABLE `notes` (
 `body`  text NOT NULL ,
 PRIMARY KEY (`id`));
 
-INSERT INTO `notes` (`id`, `body`) VALUES (1, 'This is a test');
+INSERT INTO `notes` (`id`, `body`) VALUES (1, "Ask Larry about the TPS reports.");
+INSERT INTO `notes` (`id`, `body`) VALUES (2, "Pick up milk!");

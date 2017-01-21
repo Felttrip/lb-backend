@@ -14,28 +14,33 @@ class NoteModel {
     }
 
     Note createNote(String body) {
-        try (Connection conn = sql2o.beginTransaction()) {
+        try (Connection conn = sql2o.open()) {
             long newId = (Long)conn.createQuery("insert into notes (body) VALUES (:body)",true)
                     .addParameter("body", body)
                     .executeUpdate()
                     .getKey();
-            conn.commit();
+            conn.close();
             return new Note(newId,body);
         }
     }
 
     List<Note> getAllNotes() {
         try (Connection conn = sql2o.open()) {
-            return conn.createQuery("select * from notes")
+            List<Note> ret = conn.createQuery("select id, body from notes")
                     .executeAndFetch(Note.class);
+            conn.close();
+            return ret;
         }
     }
 
     List<Note> getNotesWithBody(String body) {
+        body = "%"+body+"%";
         try (Connection conn = sql2o.open()) {
-            return conn.createQuery("select * from notes where body like %:body%")
+            List<Note> ret = conn.createQuery("select * from notes where body like :body")
                     .addParameter("body", body)
                     .executeAndFetch(Note.class);
+            conn.close();
+            return ret;
         }
     }
 
@@ -44,6 +49,7 @@ class NoteModel {
             List<Note> notes = conn.createQuery("select * from notes where id = :noteId")
                     .addParameter("noteId", noteId)
                     .executeAndFetch(Note.class);
+            conn.close();
             if(notes.size()==0){
                 throw new NoteNotFoundException("The requested note does not exist");
             }

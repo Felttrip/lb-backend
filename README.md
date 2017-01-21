@@ -34,7 +34,42 @@ Verify that MySql has started successfully in the felttrip_mysql container.
 ##Endpoints
 
 ### Get all notes
+```
+GET /api/notes
+Returns: A list of my notes
+```
+
+Example Curl
+
+`curl -i -H "Content-Type: application/json" -X GET http://localhost/api/notes`
 
 ### Get a note
+```
+GET /api/notes/1
+Returns: A single note with id 1
+```
 
-### Save a notes
+Example Curl
+
+`curl -i -H "Content-Type: application/json" -X GET http://localhost/api/notes/1`
+
+### Get a note with text in its body
+```
+GET /api/notes?query=milk
+Returns: A note with the string "milk" in its body
+```
+
+Example Curl
+
+`curl -i -H "Content-Type: application/json" -X GET http://localhost/api/notes?query=milk`
+
+### Save a note
+```
+POST /api/notes
+BODY a note
+Returns: a saved note...
+```
+
+Example Curl
+
+`curl -i -H "Content-Type: application/json" -X POST -d '{"body" : "Pick up milk!"}' http://localhost/api/notes`
