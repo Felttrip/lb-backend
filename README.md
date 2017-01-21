@@ -14,7 +14,7 @@ Please install [Docker](https://www.docker.com/) on your local environment.
 ##Installation
 After Docker is installed, run the following commands from the root of the project directory.
 
-Build/Start the MySql Container. Ensure that port `3306` is open and don't forget to replace the <absolutePathToProject>.
+Build/Start the MySql Container. Ensure that port `3306` is available and don't forget to replace the `<absolutePathToProject>`.
 This will also create and seed the database.
 
 `docker run -p 3306:3306 --name felttrip_mysql -v <absolutePathToProject>/lb-backend/sql:/docker-entrypoint-initdb.d -e MYSQL_ROOT_PASSWORD=pass -e MYSQL_DATABASE=lb_backend -d mysql:5.7`
