@@ -1,4 +1,4 @@
-#Levels Beyond Notes API
+# Levels Beyond Notes API
 
 This application is a RESTful JSON API that could back a simple note taking application. 
 
@@ -6,12 +6,12 @@ The project is written in Java and uses the [Spark micro framework](http://spark
 [Google gson](https://github.com/google/gson) for serializing and de-serializing JSON, and [Sql2o](http://www.sql2o.org/)
 for connecting with the MySql database. 
 
-##Dependencies
+## Dependencies
 This project relies on Docker to host the environment the application will run in.
  
 Please install [Docker](https://www.docker.com/) on your local environment. 
 
-##Installation
+## Installation
 After Docker is installed, run the following commands from the root of the project directory.
 
 Build/Start the MySql Container. Ensure that port `3306` is available and don't forget to replace the `<absolutePathToProject>`.
@@ -31,7 +31,7 @@ Verify that MySql has started successfully in the felttrip_mysql container.
    
 `docker run -p 80:4567 --name felttrip_lb_backend --link felttrip_mysql:my_mysql -d felttrip/lb-backend`
 
-##Endpoints
+## Endpoints
 
 ### Get all notes
 ```
